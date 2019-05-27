@@ -21,6 +21,7 @@ def forward(x, w1, b1, w2, b2, train=True):
     if train:
         return Z2
     return tf.nn.sigmoid(Z2) #sigmoid - activation function [ f(x) = 1 / (1 + e^{-x}) ] - outputs range from (0, 1)
+#non-linear activation output
 
 #activation function of a node defines the output of that node, or "neuron," given an input or set of inputs. 
 #This output is then used as input for the next node and so on until a desired solution to the original problem is found.
@@ -33,6 +34,7 @@ def init_weights(shape):
 #tf.random_normal(shape, mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name=None) outputs random values from 
 #a normal distribution.
     
+
 #tf.Variable - Exists outside the context of a single session.run call
 #tf.Tensor - Exists within the context of session.run call
     
@@ -42,12 +44,14 @@ y = np.array([[1], [1], [0], [0]])
 
 #define placeholders for input X and output y
 #tf.placeholder - variable that is assigned at a later time (can build operations and graph without data)
-phX = tf.placeholder(tf.float32, [None, 2])
+phX = tf.placeholder(tf.float32, [None, 2]) #(type, dimensionality)
 phY = tf.placeholder(tf.float32, [None, 1])
 
 #init weights - random
+#layer 1 - 5 nodes
 w1 = init_weights([2, 5])
 b1 = init_weights([5])
+#layer 2
 w2 = init_weights([5, 1])
 b2 = init_weights([1])
 
@@ -61,7 +65,7 @@ epochs = 1000
 
 #init cost function
 cost = tf.reduce_mean(
-        tf.nn.sigmoid_cross_entropy_with_logits(logits=y_hat, labels=phY))
+        tf.nn.sigmoid_cross_entropy_with_logits(logits=y_hat, labels=phY)) 
 #https://stackoverflow.com/questions/46291253/tensorflow-sigmoid-and-cross-entropy-vs-sigmoid-cross-entropy-with-logits
 
 #init train function with adam optimizer
@@ -93,7 +97,7 @@ print("Training complete.")
 #make prediction
 prediction = sess.run(pred, feed_dict={phX: X})
 print("Percentages: ")
-print(prediction)        
+print(prediction)
 print("Prediction: ")
 print(np.round(prediction))
 
@@ -101,8 +105,13 @@ print(np.round(prediction))
 plt.plot(costs)
 plt.show()
 
+#description of a network depends on its architecture and parameters (weights and biases)
+#parameters are estimated - defined as a variable of the model
+#architecture is determined by the configuration of symbolic operations
 
 
+#1. Bias - prejudice due to erroneous assumptions. Biases are built into the algorithms because they are
+#          created by individuals who have concious/unconcious preferences
 
 
 
