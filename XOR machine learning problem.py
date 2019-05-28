@@ -112,8 +112,17 @@ plt.show()
 
 #1. Bias - prejudice due to erroneous assumptions. Biases are built into the algorithms because they are
 #          created by individuals who have concious/unconcious preferences
+#          A bias unit is an "extra" neuron added to each pre-output layer that stores the value of 1. 
+#          Bias units aren't connected to any previous layer and in this sense don't represent a true "activity".
 
+#2.  Sigmoid functions are often used in artificial neural networks to
+#    introduce nonlinearity in the model. 
 
+#    A neural network element computes a linear combination of its input
+#    signals, and applies a sigmoid function to the result. A reason for its
+#    popularity in neural networks is because the sigmoid function satisfies
+#    a property between the derivative and itself such that it is
+#    computationally easy to perform.
 
 
 
