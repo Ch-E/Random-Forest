@@ -15,7 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #forward function
-def forward(x, w1, b1, w2, b2, train=True): 
+def forward(x, w1, b1, w2, b2, w3, b3, train=True): 
     Z = tf.nn.sigmoid(tf.matmul(x, w1) + b1) #matmul - multiply 2 matrices | tf.nn - wrapper for NN operations
     Z2 = tf.matmul(Z, w2) + b2
     if train:
@@ -47,6 +47,9 @@ y = np.array([[1], [1], [0], [0]])
 phX = tf.placeholder(tf.float32, [None, 2]) #(type, dimensionality)
 phY = tf.placeholder(tf.float32, [None, 1])
 
+#ValueError: Dimensions must be equal, but are 2 and 3 for 'MatMul_1' (op: 'MatMul') with input shapes: [?,2], [3,5].
+#ValueError: Cannot feed value of shape (4, 2) for Tensor 'Placeholder_4:0', which has shape '(?, 1)'
+
 #init weights - random
 #layer 1 - 5 nodes
 w1 = init_weights([2, 5])
@@ -54,9 +57,12 @@ b1 = init_weights([5])
 #layer 2
 w2 = init_weights([5, 1])
 b2 = init_weights([1])
+#layer 3
+w3 = init_weights([3, 2])
+b3 = init_weights([1])
 
-y_hat = forward(phX, w1, b1, w2, b2)
-pred = forward(phX, w1, b1, w2, b2, False)
+y_hat = forward(phX, w1, b1, w2, b2, w3, b3)
+pred = forward(phX, w1, b1, w2, b2, w3, b3, False)
 
 #init learning rate
 lr = 0.01
@@ -124,6 +130,7 @@ plt.show()
 #    a property between the derivative and itself such that it is
 #    computationally easy to perform.
 
+#https://www.geeksforgeeks.org/effect-of-bias-in-neural-network/
 
 
 
